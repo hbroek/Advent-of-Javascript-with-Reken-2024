@@ -1,0 +1,229 @@
+{
+  "categories": [
+    {
+      "name": "Men's",
+      "subcategories": [
+        {
+          "name": "Men's Tops",
+          "options": [
+            "T-Shirts",
+            "Button Downs",
+            "Graphic T-Shirts",
+            "Licensed Graphics",
+            "Coats & Jackets",
+            "Sweaters",
+            "Sweatshirts & Hoodies",
+            "Polos"
+          ]
+        },
+        {
+          "name": "Men's Bottoms",
+          "options": [
+            "Jeans",
+            "Pants",
+            "Sweatpants",
+            "Pajama Bottoms",
+            "Shorts",
+            "Swimsuits"
+          ]
+        },
+        {
+          "name": "Active",
+          "options": [
+            "Activewear Tops",
+            "Activewear Bottoms",
+            "Shop by Activity"
+          ]
+        },
+        {
+          "name": "Accessories",
+          "options": [
+            "Socks & Underwear",
+            "Pajamas & Loungewear",
+            "Shoes",
+            "Accessories"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Women's",
+      "subcategories": [
+        {
+          "name": "Pajamas",
+          "options": []
+        },
+        {
+          "name": "Activewear",
+          "options": []
+        },
+        {
+          "name": "All Bottoms",
+          "options": [
+            "Jeans",
+            "Pants",
+            "Shorts",
+            "Swimsuits"
+          ]
+        },
+        {
+          "name": "All Tops",
+          "options": [
+            "Sweaters & Cardigans",
+            "T-Shirts",
+            "Sweatshirts & Sweatpants",
+            "Loungewear",
+            "Coats & Jackets",
+            "Dresses & Jumpsuits",
+            "Puffer Jackers & Vests",
+            "Dresses & Jumpsuits",
+            "Skirts",
+            "Shirts & Blouses",
+            "Button-Down Shirts",
+            "Everyday Leggings",
+            "Bras & Underwear"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Boy's",
+      "subcategories": [
+        {
+          "name": "New Arrivals",
+          "options": []
+        },
+        {
+          "name": "Activewear",
+          "options": []
+        },
+        {
+          "name": "Sweatshirts & Sweatpants",
+          "options": []
+        },
+        {
+          "name": "Pajamas",
+          "options": []
+        },
+        {
+          "name": "Graphic Tees & T-Shirts",
+          "options": []
+        },
+        {
+          "name": "Polos",
+          "options": []
+        },
+        {
+          "name": "Button Downs & Flannels",
+          "options": []
+        },
+        {
+          "name": "Sweaters",
+          "options": []
+        },
+        {
+          "name": "Coats & Jackets",
+          "options": []
+        },
+        {
+          "name": "Pants",
+          "options": []
+        },
+        {
+          "name": "Jeans",
+          "options": []
+        },
+        {
+          "name": "Shorts",
+          "options": []
+        },
+        {
+          "name": "Swimsuits",
+          "options": []
+        },
+        {
+          "name": "Shoes",
+          "options": []
+        },
+        {
+          "name": "Accessories",
+          "options": [
+            "Socks & Underwear",
+            "Multipacks"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Girl's",
+      "subcategories": [
+        {
+          "name": "New Arrivals",
+          "options": []
+        },
+        {
+          "name": "Activewear",
+          "options": []
+        },
+        {
+          "name": "Sweatshirts & Sweatpants",
+          "options": []
+        },
+        {
+          "name": "Pajamas",
+          "options": []
+        },
+        {
+          "name": "Graphic Tees & T-Shirts",
+          "options": []
+        },
+        {
+          "name": "Shirts & Blouses",
+          "options": []
+        },
+        {
+          "name": "Sweaters",
+          "options": []
+        },
+        {
+          "name": "Coats & Jackets",
+          "options": []
+        },
+        {
+          "name": "Dresses & Jumpsuits",
+          "options": []
+        },
+        {
+          "name": "Swimsuits",
+          "options": []
+        },
+        {
+          "name": "Shorts & Skirts",
+          "options": []
+        },
+        {
+          "name": "Jeans",
+          "options": []
+        },
+        {
+          "name": "Leggings",
+          "options": []
+        },
+        {
+          "name": "Pants",
+          "options": []
+        },
+        {
+          "name": "Shoes",
+          "options": []
+        },
+        {
+          "name": "Accessories",
+          "options": [
+            "Socks & Underwear"
+          ]
+        }
+      ]
+    }
+  ]
+}

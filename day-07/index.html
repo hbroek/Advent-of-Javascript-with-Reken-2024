@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+    }
+
+    .slugify {
+      label {
+        display:inline-block;
+        background-color:#EDEDED;
+        border-radius: 10px;
+
+        input {
+          color:  #CFCECE; 
+        }
+      }
+
+    }
+
+    input background color: #EDEDED
+input stroke color: #CFCECE
+focus border color: #0015FF
+rounded border: 10px
+
+font: Inter - https://fonts.google.com/specimen/Inter
+default label size: 14px bold
+
+input text size: 24px regular
+
+slug text size: 16px regular
+  </style>
+</head>
+
+<body>
+  <h1>07 - Slugify input || Advent of JavaScript</h1>
+
+  <div class="slugify">
+    <div>
+      <label>Title<br>
+        <input type="text" data-on-input="textString=e.target.value" data-value="textString">
+      </label>
+    </div>
+    <output data-text="/${textString.split(' ').join('-')}">
+    </output>
+
+</body>
+
+<script>
+  let textString = "";
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

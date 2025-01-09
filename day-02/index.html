@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 - Password Field || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --primary: #26C9C3;
+      --secondary: rgb(19,12,57);
+      --transition-time: 0.25s;
+      --card-height: 10em;
+      --card-width: 30em;
+    }
+    html {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    div.combo-box {
+      height: var(--card-height);
+      width: var(--card-width);
+      background: #EEE;
+      display: inline-flex;
+      box-sizing:border-box;
+
+      menu {
+        position: absolute;
+        top: var(--card-height);
+        list-style-type: none;
+        padding-inline-start: 0;
+      }
+      input {
+        width: 80%;
+        background-color: #eee;
+        font-size: 2em;
+        height:2em;
+        border:none;
+        border-bottom: 1px solid black;
+        place-self: center;
+        padding: 0.5em;
+      }
+      span {
+        text-align: center;
+        place-self: center;
+        width: 20%;
+        font-size:xx-large;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <title>02 - Input / Combobox || Advent of JavaScript</title>
+  <div class="combo-box" data-rest="movieList:top-100-christmas-movies.json">
+    <input data-on-input="filterString=e.target.value" data-if="open" type="text" list="movies"/>
+    <movie-card data-if="!open" movie="movieList[selected]"></movie-card>
+    <span data-action="open=!open">↕️</span>
+    <menu id="movies" data-if="movieList.length>0&&open" data-for="m:movieList.filter(m => m.Title.indexOf(filterString)>=0)">
+      <movie-card movie="m.item" data-action="selected=parseInt(m.item.Title.split('.')[0])-1;open=false"></movie-card>
+    </menu>
+  </div>
+  <h1 data-text="${movieList[selected].Title}"></h1>
+</body>
+<script>
+  let movieList = []
+  let selected = 0;
+  let open = false;
+  let filterString = '';
+</script>
+
+<template data-component="movie-card" data-arg-movie>
+  <style>
+    :host {
+      background: #EEE;
+      margin-bottom: 0.5em;
+      border-radius: 0.5em;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.5em;
+      width: var(--card-width); /* adjust to your desired width */
+      height: var(--card-height); /* adjust to your desired height */
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 0.5em 0 0 0.5em;
+    }
+
+    h1 {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      align-self: end;      
+      margin:0;
+      padding:0;
+    }
+
+    span {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 1rem;
+      color: #666;
+      margin-top: auto;
+      align-self: start;
+      display: inline-block;
+      margin:0;
+      padding:0;
+    }
+
+    :host:hover {
+      background-color: skyblue;
+      color: white;
+    }
+
+    :host:hover span {
+      color:white;
+    }
+  </style>
+  <li>
+    <img data-attr-src="${movie['Image']}" data-attr-alt="${movie['Image Alt']}"/>
+    <h1 data-text="${movie['Title']}"></h1>
+    <span data-text="${movie['Year']}"></span>
+  </li>
+</template>
+
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
+</html>

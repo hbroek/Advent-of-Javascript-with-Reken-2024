@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      background-color: #158181;
+      color:white;
+    }
+
+    windows-toolbar {
+      position: fixed;
+      left:0;
+      bottom:0;
+      width:100vw;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>11 - Digital Clock || Advent of JavaScript</h1>
+
+  <windows-toolbar data-interval="1000:true:true==true" text="${(new Date()).toLocaleTimeString()}"></windows-toolbar>
+</body>
+
+
+<template data-component="windows-toolbar" data-arg-text="Hello">
+  <style>
+    :host {
+      padding:0;
+      margin:0;
+      @font-face {
+        font-family: Krona;
+        src: url(https://fonts.google.com/specimen/Krona+One);
+      }
+    }
+    :host > text {
+      font-family: Krona;
+      font-size: 24px;
+    }
+  </style>
+  <svg width="1440" height="59" viewBox="0 0 1440 59" preserveAspectRatio="xMaxYMax" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1440 0.176758H0V59.1768H1440V0.176758Z" fill="#CCCCCC"/>
+      <path d="M4.68117 55.303V4.0505L0 0.176758V59.1768L4.68117 55.303Z" fill="#F2F2F2"/>
+      <path d="M1435.32 4.0505V55.303L1440 59.1768V0.176758L1435.32 4.0505Z" fill="#4D4D4D"/>
+      <path d="M4.68117 4.0505H1435.32L1440 0.176758H0L4.68117 4.0505Z" fill="#E6E6E6"/>
+      <path d="M1435.32 55.303H4.68117L0 59.1768H1440L1435.32 55.303Z" fill="#666666"/>
+      <path d="M1431.26 7.32847H1288.95V51.9261H1431.26V7.32847Z" fill="#CCCCCC"/>
+      <path d="M1292.65 48.0524V11.1029L1288.95 7.32847V51.9261L1292.65 48.0524Z" fill="#999999"/>
+      <path d="M1427.66 11.1029V48.0524L1431.36 51.9261V7.32847L1427.66 11.1029Z" fill="#F2F2F2"/>
+      <path d="M1292.65 11.1029H1427.66L1431.36 7.32847H1288.95L1292.65 11.1029Z" fill="#ABABAB"/>
+      <path d="M1427.66 48.0524H1292.65L1288.95 51.9261H1431.36L1427.66 48.0524Z" fill="#E6E6E6"/>
+      <path d="M1282.68 5.34193H1273.08V53.9126H1282.68V5.34193Z" fill="#CCCCCC"/>
+      <path d="M1277.64 50.0389V9.11635L1273.08 5.34193V53.9126L1277.64 50.0389Z" fill="#999999"/>
+      <path d="M1278 9.11635V50.0389L1282.68 53.9126V5.34193L1278 9.11635Z" fill="#F2F2F2"/>
+      <path d="M1277.64 9.11634H1278L1282.68 5.34193H1273.08L1277.64 9.11634Z" fill="#ABABAB"/>
+      <path d="M1278 50.0389H1277.64L1273.08 53.9126H1282.68L1278 50.0389Z" fill="#E6E6E6"/>
+      <text x="1295" y="38" stroke="black" data-text="${text}">12:00 PM</text>
+  </svg>
+</template>
+<script>
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --primary: #26C9C3;
+      --secondary: rgb(19,12,57);
+      --transition-time: 0.25s;
+      --card-height: 10em;
+      --card-width: 30em;
+    }
+    html {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    div {
+      display: inline-flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>05 - Character count || Advent of JavaScript</h1>
+  <div>
+    <textarea rows="10" data-value="textString"></textarea>
+    <span style="align-self: end;" data-text="Count: ${textString.length}"></span>
+  </div>
+</body>
+
+<script>
+  let textString = "";
+</script>
+
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
+</html>

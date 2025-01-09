@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      background-color: black;
+      color:white;
+    }
+    xbutton {
+      background:  #33ff01;
+      padding: 0.5em 2em ;
+      font-size:2em;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>10 - Floating Action Button || Advent of JavaScript</h1>
+  <floating-button icons="social_media"></floating-button>
+</body>
+
+<script>
+  const social_media = [
+    {icon: 'bluesky', url:'https://bluesky.com'},
+    {icon: 'github', url:'https://github.com'},
+    {icon: 'instagram', url:'https://instagram.com'},
+    {icon: 'threads', url:'https://threads.com'},
+    {icon: 'youtube', url:'https://youtube.com'}
+  ]
+</script>
+
+<template data-component="floating-button" data-arg-icons data-arg-size="10em">
+  <style>
+    :host {
+      position: fixed;
+      bottom: 2em;
+      right: 2em;
+    }
+    :host > button {
+      all:unset;
+      background-image: url(megaphone.svg);
+      width: 60px;
+      height:60px;
+      background-color: #33ff01;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      padding: 1em;
+      border-radius: 50%;
+    }
+    :host > button.expanded {
+      background-image: url(close.svg);
+    }
+    :host > nav {
+      position: absolute;
+      top: -1em;
+      left: -1em;
+      width:5em;
+      height:5em;
+      z-index:-1;
+    }
+    :host > nav > * {
+      display:block;
+      position: absolute;
+      top:50%;
+      left:50%;
+    }
+  </style>
+  <script>
+    let expanded = false;
+  </script>
+  <div>
+    <button data-class="expanded" type="button" data-action="expanded=!expanded"></button>
+    <nav xdata-if="expanded" data-for="icon:icons">
+      <floating-icon image="${icon.item.icon}" url="${icon.item.url}" deg="${expanded?140+200/5*icon.index:0}" size="${expanded?10:0}"></floating-icon>
+    </nav>
+  </div>
+</template>
+
+<template data-component="floating-icon" data-arg-image data-arg-url data-arg-deg="0" data-arg-size>
+  <style>
+    :host {
+      all:unset;
+      display:inline-block;
+      position:absolute;
+      width: 24px;
+      height: 24px;
+      background-color: #3f3f3f;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      border-radius: 50%;
+      padding:0.35em;
+      transition: 1s transform;
+    }
+    :host:hover {
+      background-color: #33ff01;
+    }
+    :host:active {
+      border: 2px white solid;      
+    }
+  </style>
+  <a data-attr-href="${url}" data-style="background-image:url(${image}.svg); transform: rotate(${deg}deg) translate(calc(${size}em / 2)) rotate(-${deg}deg)"></a>
+</template>
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+</html>

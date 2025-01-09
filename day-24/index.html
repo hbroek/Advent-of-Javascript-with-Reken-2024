@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono">
+  <title>24 - CSS Box Shadow Generator || Advent of JavaScript</title>
+  <!-- <link rel="stylesheet" href="../css/index.css" /> -->
+  <style>
+    :root {
+      --primary: #26C9C3;
+      --secondary: rgb(19, 12, 57);
+      --transition-time: 0.25s;
+      --card-height: 10em;
+      --card-width: 30em;
+    }
+
+    html {
+      font-family: 'Roboto Mono', serif;
+    }
+
+    body {
+      /* display:grid;
+      grid-template-columns: 5fr 3fr; */
+    }
+
+    header {
+      /* grid-column: 1fr 8fr;       */
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      border-radius: 0.5em;
+    }
+
+    editor,
+    preview {
+      padding: 1em;
+    }
+
+    editor {
+      background: #E9E9E9;
+      border-radius: 0.25em;
+    }
+
+    preview {
+      background: sandybrown;
+      display: grid;
+      place-content: center;
+    }
+
+    fieldset {
+      display: inline-grid;
+      grid-template-columns: 4fr 2fr 1fr;
+      gap: 0.5em;
+      padding: 1em;
+      align-items: center;
+      font-size: 0.75em;
+      border: 0;
+
+      input[type=text] {
+        all: unset;
+        background: white;
+        font-size: 1em;
+        border-radius: 0.25em;
+        padding: 0 0.25em;
+        position: relative;
+      }
+
+      input[type=range] {
+        grid-column: 1 / 4;
+      }
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    display-box {
+      display: inline-block;
+      height: 8em;
+      width: 8em;
+    }
+
+    button {
+      all: unset;
+      background: black;
+      color: sandybrown;
+      border-radius: 1em;
+      padding: 1em 4em;
+      margin-top: 1em;
+    }
+    button:active {
+      transform: scale(1.05);
+    }
+
+    show-code {
+      position: relative;
+      background: sandybrown;
+      padding: 1em;
+    }
+
+    button.close {
+      background: transparent;
+      color: black;
+      padding: 1em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+    }
+
+    button.copy {
+      background: white;
+      padding-inline: 1em;
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      margin: 0;
+      padding: 0.5em;
+      color: black;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    @font-face {
+      font-family: 'FontWithASyntaxHighlighter';
+      src:
+        url('FontWithASyntaxHighlighter-Regular.woff2') format('woff2');
+    }
+
+    code {
+      font-family: "FontWithASyntaxHighlighter", monospace;
+      display: block;
+    }
+
+    pre {
+      position: relative;
+      background: black;
+      border-radius: 1em;
+      color: white;
+      padding: 0.5em;
+      margin: 1em;
+      line-height: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>24 - CSS Box Shadow Generator || Advent of JavaScript</h1>
+  </header>
+  <main>
+    <editor>
+      <h3>CSS Box Shadow Generator</h3>
+      <form>
+        <input-control label="Horizontal Length" input="hlen" slider="true"></input-control>
+        <input-control label="Vertical Length" input="vlen" slider="true"></input-control>
+        <input-control label="Blur Radius" input="brad" slider="true"></input-control>
+        <input-control label="Spread Radius" input="srad" slider="true"></input-control>
+        <input-control label="Shadow Color" input="scol" slider="false" color="true"></input-control>
+        <input-control label="Background" input="bcol" slider="false" color="true"></input-control>
+        <input-control label="Box Color" input="xcol" slider="false" color="true"></input-control>
+        <input-control label="Opacity" input="opac" slider="true" list="true"></input-control>
+        <div></div>
+        <label style="display:flex;align-items:center;font-size:12px;">Outline <toggle-switch checked="inset"></toggle-switch> Inset</label>
+      </form>
+    </editor>
+    <preview data-if="!showCode" data-attr-style="background:${bcol}">
+      <display-box
+        data-style="background:${xcol};box-shadow: ${hlen}px ${vlen}px ${brad}px ${srad}px rgba(${hexToRgb(scol).join(',')},${opac/100}) ${inset?' inset':''}"></display-box>
+    </preview>
+    <show-code data-if="showCode">
+      <display-code>
+        <header>
+          <h3>CSS</h3>
+        </header>
+        <pre>
+          <code data-text="${sourceCode}"></code>
+          <button class="copy" data-action="navigator.clipboard.writeText(sourceCode)"><img src="clipboard.svg">Copy to Clipboard</button>
+        </pre>
+        <button class="close" type="button" data-action="showCode=false;">✖️</button>
+      </display-code>
+    </show-code>
+  </main>
+  <footer>
+    <button type="button" data-action="showCode=true">Get Code</button>
+  </footer>
+</body>
+<script>
+  let hlen = 0;
+  let vlen = 8;
+  let brad = 24;
+  let srad = 0;
+  let scol = '#959da5'
+  let bcol = '#FFFFFF';
+  let xcol = '#f3a712';
+  let opac = 30;
+  let inset = false;
+  let showCode = false;
+  let sourceCode;
+
+
+  function hexToRgb(hex) {
+    if (hex.startsWith('#'))
+      hex = scol.substring(1);
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+
+    return [r, g, b];
+  }
+</script>
+<script data-calc>
+  sourceCode =
+    `.box {
+  background: ${bcol};
+  box-shadow: ${hlen}px ${vlen}px ${brad}px ${srad}px rgba(${hexToRgb(scol).join(',')},${opac / 100}${inset?' inset':''});
+}`
+
+</script>
+
+<template data-component="input-control" data-arg-label data-bind-input data-arg-slider data-arg-color>
+  <script>
+    let id = `id_${parseInt(Math.random() * 1000000)}`
+  </script>
+  <fieldset>
+    <label data-attr-for="${id}" data-text="${label}">Horizontal Length</label>
+    <input data-value="input" data-attr-id="${id}" data-attr-type="${color?'color':'text'}" size="2" />
+    <div data-if="!color" data-text="${label=='Opacity'?'%':'px'}">px</div>
+    <div data-if="color" data-style="width:2em;height:2em;background:${input}"></div>
+    <input data-if="slider" data-value="input" type="range" />
+  </fieldset>
+</template>
+
+<template data-component="toggle-switch" data-bind-checked>
+  <style>
+    /* The switch - the box around the slider */
+    :host {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    :host input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    :host span.slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    :host span.slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    :host input:checked+.slider {
+      zbackground-color: #2196F3;
+    }
+
+    :host input:focus+.slider {
+      zbox-shadow: 0 0 1px #2196F3;
+    }
+
+    :host input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    :host span.slider.round {
+      border-radius: 34px;
+    }
+
+    :host span.slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+
+  <label class="switch">
+    <input type="checkbox" data-value="checked">
+    <span class="slider round"></span>
+  </label>
+</template>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      background-color: black;
+      color:white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>08 - Tag input field || Advent of JavaScript</h1>
+
+  <div class="tags">
+    <label>Tags<br>
+      <div data-for="tag:tags" style="display:inline-block;">
+        <tag-bullet data-on-removetag="tags.splice(tag.index,1)" text="${tag.item}"></tag-bullet>
+      </div>
+      <input type="text" data-on-input="if (e.target.value.endsWith(',')){let x = e.target.value;tags.push(x.substring(0,x.length-1));e.target.value=''}"/>
+    </label>
+  </div>
+
+</body>
+
+<script>
+  let tags = [];
+</script>
+
+<template data-component="tag-bullet" data-arg-text>
+  <style>
+    :host {
+      border-radius: 1em;
+      border: white 1px solid;
+      display: inline-flex;
+      background: black;
+      color:white;
+      padding: 0.25em 0.5em;
+      margin-inline: 0.25em;
+      align-items: center;
+      gap: 0.25em;
+    }
+
+    :host>button {
+      color: silver;
+    }
+
+    :host>button:hover {
+      color: red;
+    }
+  </style>
+  <div>
+    <span data-text="${text}"></span>
+    <button type="button" data-action="console.log('REMOVETAG');dispatch('removetag',text)">X</button>
+  </div>
+</template>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

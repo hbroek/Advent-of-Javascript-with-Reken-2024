@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18 - Pricing Chart || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      /* background: black;
+      color: white; */
+      font-size: 16pt;
+      background-image: linear-gradient(180deg, #FFF, #DDD);
+    }
+
+    .card {
+      display: inline-flex;
+      border: 1px silver solid;
+      background: white;
+      border-radius: 1em;
+      padding: 1.5em;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    hr {
+      width: calc(100% + 3em);
+      translate: -1.5em;
+    }
+
+    li {
+      padding: 0.5em 0.5em;
+    }
+
+    li::marker {
+      content: '✅';
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>18 - Pricing Chart || Advent of JavaScript</h1>
+
+
+  <main style="display:grid; grid-template-columns: 1fr; justify-items: center; gap:1em;">
+    <img src="LOGO.svg" />
+    <form class="card">
+      <h1>
+        <label>
+          <super>$</super><output data-text="${pricing[pricingIndex].price}"></output>
+        </label>
+      </h1>
+      <small>Per month with annual subscription discount; $<span data-text="${12*pricing[pricingIndex].price}">216</span> billed up front. $<span data-text="${pricing[pricingIndex].monthly}">20</span> if billed monthly.</small>
+      <hr />
+      <h1 style="align-self:start;text-transform: uppercase;" data-text="${pricing[pricingIndex].name}">Pro</h1>
+      <h2 style="align-self:start" data-text="${pricing[pricingIndex].user_type}">for Claude users</h2>
+      <ul data-for="f:pricing[pricingIndex].features">
+        <li data-text="${f.item}"></li>
+      </ul>
+    </form>
+    <span style="display:inline-flex;align-items:center;gap:0.25em;">Pro <toggle-switch checked="team"></toggle-switch> Team</span>
+  </main>
+
+</body>
+
+<script>
+  let team = false;
+  const pricing = [
+    {
+      name: 'Pro',
+      price:18,
+      monthly: 20,
+      user_type: 'for Claude power users',
+      features: [
+        'More usage than Free',
+        'Accessto Projects to organize documents and chats',
+        'Ability to use more models, like CLause 3.5, Sonnet, and Clause 3 Opus',
+        'Early access to new features'
+      ]
+    },
+    {
+      name: 'Team',
+      price:25,
+      monthly: 30,
+      user_type: 'for fast-growing teams',
+      features: [
+        'More usage than Pro',
+        'Central billing and administration',
+        'Early access to collaboration features'
+      ]
+    }
+  ]
+</script>
+<script data-calc>
+  let pricingIndex = team ? 1 : 0;
+</script>
+
+<template data-component="toggle-switch" data-bind-checked>
+  <style>
+    /* The switch - the box around the slider */
+    :host {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    :host input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    :host span.slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    :host span.slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    :host input:checked+.slider {
+      zbackground-color: #2196F3;
+    }
+
+    :host input:focus+.slider {
+      zbox-shadow: 0 0 1px #2196F3;
+    }
+
+    :host input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    :host span.slider.round {
+      border-radius: 34px;
+    }
+
+    :host span.slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+
+  <label class="switch">
+    <input type="checkbox" data-value="checked">
+    <span class="slider round"></span>
+  </label>
+</template>
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

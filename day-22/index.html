@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>22 - Drag and Drop Cards || Advent of JavaScript</title>
+  <!-- <link rel="stylesheet" href="../css/index.css" /> -->
+  <style>
+    :root {
+      --primary: #26C9C3;
+      --secondary: rgb(19, 12, 57);
+      --transition-time: 0.25s;
+      --card-height: 10em;
+      --card-width: 30em;
+    }
+
+    html {
+      font-family: 'Helvetica Neu', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    main {
+      background-image: url(background.png);
+      background-size: cover;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      background: rgba(255, 192, 203, 0.8);
+      margin: 1em;
+      padding: 0.5em;
+      border-radius: 0.5em;
+    }
+
+    section>h3 {
+      opacity: 1;
+      color: white;
+    }
+
+    todo-card {
+      margin: 0.5em;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      display: contents;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>22 - Drag and Drop Cards || Advent of JavaScript</h1>
+
+  <main data-for="board:boards">
+    <section data-attr-data-index="${board.index}" data-on-drop="OnDrop(e)" data-on-dragover="OnDragOver(e)"
+      data-on-dragleave="OnDragLeave(e)">
+      <h3 data-text="${board.item}"></h3>
+      <div class="list" data-for="card:actionItems[board.index]">
+        <todo-card draggable="true" data-on-dragstart="OnDragStart(e)" data-status="0" data-attr-data-index="${card.index}" text="${card.item}" completed="${board.index==2}"></todo-card>
+      </div>
+    </section>
+  </main>
+</body>
+<script>
+  let boards = ['Next', "Current", "Done"]
+  let actionItems = [
+    [
+      "Create a gift list for family and friends",
+      "Decorate the tree",
+      "Plan Christmas Dinner",
+      "Replace burn out bulbs",
+      "Update Holiday Card List",
+      "Create Holiday Music Playlist",
+      "Make cookies for Santa"
+    ],
+    [
+      "Plan Holiday Activities"
+    ],
+    [
+      "Get All Wrapping Supplies",
+      "Deep Clean the House"
+    ]
+  ]
+
+  function OnDragOver(event) {
+    color = 'DRAGOVER'
+    event.srcElement.setAttribute('DragOver', true);
+    event.stopPropagation();    //  let child accept and don't pass up to parent element
+    event.preventDefault();     //  ios to accept drop
+    event.dataTransfer.dropEffect = 'move';//   move has no icon? adding copy shows +
+  }
+  function OnDragLeave(event) {
+    color = 'DRAGLEAVE'
+    event.srcElement.removeAttribute('DragOver');
+
+    if (event.target)
+      event.target.removeAttribute('DragOver');
+  }
+
+  function findDropTarget(elem) {
+    if (typeof elem.dataset.index != 'undefined')
+      if (elem.tagName == 'SECTION' || elem.tagName == 'DIV')
+        return elem;
+    if (elem.parentElement)
+      return findDropTarget(elem.parentElement)
+    else
+      return false;
+  }
+
+  function arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+  }
+
+  function OnDrop(event) {
+    sourceDetails = JSON.parse(event.dataTransfer.getData('text/plain'));
+
+    const target = findDropTarget(event.target)
+    if (target) {
+      if (target.dataset.index && typeof target.dataset.status == 'undefined') {
+        actionItems[target.dataset.index].push(actionItems[sourceDetails.status].splice(sourceDetails.index, 1)[0])
+        return;
+      }
+      if (target.dataset.index && target.dataset.status == sourceDetails.status) {
+        const arr = actionItems[target.dataset.status];
+        arraymove(arr, sourceDetails.index, target.dataset.index)
+      }
+    }
+    event.srcElement.removeAttribute('DragOver');
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  function OnDragStart(event) {
+    event.stopPropagation(); // let child take the drag
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.dropEffect = 'move';
+    const sourceDetails = JSON.stringify({
+      'status': event.srcElement.dataset.status,
+      'index': event.srcElement.dataset.index
+    })
+    event.dataTransfer.setData('text/plain', sourceDetails);
+  }
+
+</script>
+
+<template data-component="todo-card" data-arg-completed data-arg-text="<no text>">
+  <style>
+    :host {
+      border-radius: 0.5em;
+      background: white;
+      display: inline-flex;
+      align-items: start;
+      padding: 0.5em 1em;
+    }
+  </style>
+  <script data-calc>
+    let finished = completed === 'true'
+  </script>
+  <div>
+    <custom-checkbox input="finished"></custom-checkbox>
+    <span data-text="${text}"></span>
+  </div>
+</template>
+
+<template data-component="custom-checkbox" data-bind-input>
+  <style>
+    :host {
+      all: unset;
+      width: 28px;
+      height: 32px;
+      background-image: url(checkbox--unchecked.svg);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      padding-right: 0.5em;
+    }
+
+    :host:checked {
+      background-image: url(checkbox--checked.svg);
+    }
+  </style>
+  <input type="checkbox" data-value="input" />
+</template>
+
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+</html>

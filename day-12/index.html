@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    @font-face {
+      font-family: 'DM Serif';
+      src: url(https://fonts.google.com/specimen/DM+Serif+Display);
+    }
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      background-image: url(PAPER-TEXTURE.jpeg);
+      background-size:cover;
+      
+    }
+    .quote {
+      color: #4B4035;
+      font-family: 'DM Serif';
+      font-size: 120px;
+      line-height: 110px;
+      font-style: Italic;
+    }
+    body {
+      display:grid;
+      height:100vh;
+      width:100vw;
+      text-align: center;
+    }
+    .quotemark {
+      place-self: center;
+      fill: #A07C5B;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 data-rest="quotes:quotes.json">12 - Quote Generator|| Advent of JavaScript</h1>
+
+  <q data-if="quotes" class="quote" data-text="${quotes[parseInt(Math.random()*quotes.length-1)].quote}">There is always tomorrow</q>
+
+</body>
+
+<script>
+  let quotes
+  let quote = "There is always more tomorrow"
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+</html>

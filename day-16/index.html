@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>16 - CSS Grid Generator || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+    section {
+      display:flex;
+      gap: 1em;
+      align-items: start;
+    }
+    nav {
+      background:#333;
+      gap: 1em;
+      display:flex;
+      flex-direction:column;
+    }
+    header {
+      color: yellow;
+    }
+    form {
+      display:flex;
+      flex-direction:column;
+      gap: 0.25em;
+
+      label {
+        display:flex;
+        justify-content:space-between;
+        gap: 0.5em
+      }
+      label > span {
+        align-self: left;
+      }
+      label > input {
+        align-self: right;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>16 - CSS Grid Generator || Advent of JavaScript</h1>
+
+  <section>
+    <nav>
+      <header><h1>CSS Grid Generator</h1></header>
+      <form>
+        <label><span>Columns</span><input type="number" data-value="columns"></label>
+        <label><span>Rows</span><input type="number" data-value="rows"></label>
+        <label><span>Column Gap</span><input type="number" data-value="col_gap"></label>
+        <label><span>Row Gap</span><input type="number" data-value="row_gap"></label>
+      </form>
+      <button style="padding:0.5em 1em; margin:1em; border: 1px solid white;border-radius:0.5em;background:black;color:yellow; " type="button" data-action="navigator.clipboard.writeText(grid_style)">Get Code</button>
+    </nav>
+    <div class="preview" data-style="${grid_style};border:1px solid yellow" data-for="c:columns*rows">
+      <div style="border:1px gray solid;width:2em;height:2em;"></div>
+    </div>
+  </section>
+
+</body>
+
+<script>
+  let columns = 5
+  let col_gap = 2;
+  let rows = 5
+  let row_gap = 2;
+  let grid_style;
+</script>
+
+<script data-calc>
+  grid_style = `display:grid;grid-template-columns:repeat(${columns}, 1fr);grid-template-rows:repeat(${rows}, 1fr);column-gap:${col_gap}px;row-gap:${row_gap}px;`
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

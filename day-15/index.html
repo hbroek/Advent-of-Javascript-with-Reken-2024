@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15 - YouTube Embed Responsive || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2em;
+      place-items: center;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>15 - YouTube Embed Responsive || Advent of JavaScript</h1>
+
+
+  <iframe data-attr-width="${document.body.clientWidth}" data-attr-height="${document.body.clientWidth/700*396}" src="https://www.youtube.com/embed/a7FZaMXs9nk"
+    title="Fun 2 weeks on the Happy Island of Aruba" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+
+<script>
+  window.addEventListener('resize', (e)=>{if (reken) reken.force_calculate()})
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

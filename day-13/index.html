@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Character count || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url(https://fonts.google.com/specimen/Inter);
+    }
+
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2em;
+      place-items: center;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+
+    .dial-number {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .outer-ring {
+      background: conic-gradient(#E1E4FD,#B8BAF9);
+    }
+
+    .outer-ring.warm {
+      background: conic-gradient(rgba(231, 29, 43, 0.944),rgba(231, 29, 43, 0.5));
+    }
+  </style>
+
+</head>
+
+<body data-on-pointermove="if (dragStart) deg=getDegree([e.clientX,e.clientY])">
+  <h1 data-rest="quotes:quotes.json">13 - Temperature Converter|| Advent of JavaScript</h1>
+
+  <div style="width:404px;height:404px;position:relative;display:inline-grid;">
+    <svg style="position:absolute;top:0;left:0;" width="404" height="404" viewBox="0 0 404 404" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <circle cx="202" cy="4" r="4" fill="black" />
+      <circle cx="202" cy="400" r="4" fill="black" />
+      <circle cx="400" cy="202" r="4" transform="rotate(90 400 202)" fill="black" />
+      <circle cx="4" cy="202" r="4" transform="rotate(90 4 202)" fill="black" />
+      <circle cx="61.9929" cy="342.007" r="4" transform="rotate(-135 61.9929 342.007)" fill="black" />
+      <circle cx="342.007" cy="61.9929" r="4" transform="rotate(-135 342.007 61.9929)" fill="black" />
+      <circle cx="342.007" cy="342.007" r="4" transform="rotate(135 342.007 342.007)" fill="black" />
+      <circle cx="61.9929" cy="61.9928" r="4" transform="rotate(135 61.9929 61.9928)" fill="black" />
+      <circle cx="280.296" cy="20.1381" r="4" transform="rotate(23.293 280.296 20.1381)" fill="black" />
+      <circle cx="123.704" cy="383.862" r="4" transform="rotate(23.293 123.704 383.862)" fill="black" />
+      <circle cx="22.4091" cy="285.373" r="4" transform="rotate(-114.903 22.4091 285.373)" fill="black" />
+      <circle cx="381.591" cy="118.627" r="4" transform="rotate(-114.903 381.591 118.627)" fill="black" />
+      <circle cx="386.538" cy="273.761" r="4" transform="rotate(111.249 386.538 273.761)" fill="black" />
+      <circle cx="17.4618" cy="130.239" r="4" transform="rotate(111.249 17.4618 130.239)" fill="black" />
+      <circle cx="125.914" cy="19.2026" r="4" transform="rotate(-22.5986 125.914 19.2026)" fill="black" />
+      <circle cx="278.086" cy="384.797" r="4" transform="rotate(-22.5986 278.086 384.797)" fill="black" />
+    </svg>
+    <div class="dial-number" style="position:absolute;top:100%;left:calc(50% - 0.25em);"><span
+        data-text="${displayDegree(0, unit)}">0</span></div>
+    <div class="dial-number" style="position:absolute;top:calc(50% - 0.5em);left:-1.2em;"><span
+        data-text="${displayDegree(10, unit)}">10</span></div>
+    <div class="dial-number" style="position:absolute;top:-1em;left:calc(50% - 0.5em);"><span
+        data-text="${displayDegree(20, unit)}">20</span></div>
+    <div class="dial-number" style="position:absolute;top:calc(50% - 0.6em);left:100%;"><span
+        data-text="${displayDegree(30, unit)}">30</span></div>
+
+    <div
+      class="outer-ring" data-class="warm:temp>20"
+      data-style="position:absolute;top:24px;left:24px;width:356px; height:356px;border-radius:50%;rotate:${deg-180}deg; xtransition: rotate 1s"
+      data-on-click="dragStart=!dragStart">
+      <svg style="position:absolute;top:-12px;left:164px;" width="28" height="28" viewBox="0 0 28 28" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M3 14C3 7.92487 7.92487 3 14 3C20.0751 3 25 7.92487 25 14C25 20.0751 20.0751 25 14 25C7.92487 25 3 20.0751 3 14Z"
+          fill="#E0E3FD" data-attr-stroke="${dragStart?'purple':'black'}" stroke-width="6" />
+      </svg>
+    </div>
+
+    <svg width="282" height="282" viewBox="0 0 282 282" fill="white" xmlns="http://www.w3.org/2000/svg" data-style="position:absolute;top:60px;left:60px;rotate:${deg}deg;transition:1s">
+      <circle cx="141" cy="141" r="134.5" stroke="url(#paint0_angular_2006_41)" stroke-width="13" />
+      <defs>
+        <radialGradient id="paint0_angular_2006_41" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(200 200) rotate(90) scale(200)">
+          <stop stop-color="#7E0481"/>
+          <stop offset="0.24" stop-color="#0009FF" />
+          <stop offset="0.52" stop-color="#7E0481" />
+          <stop offset="0.76" stop-color="#FF0000" />
+          <stop offset="1" stop-color="#7E0481" />
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <div style="place-self: center;z-index:10;font-size:4em;font-weight:bold;">
+      <span 
+        data-text="${displayDegree(temp, unit).toFixed(0)}"
+        style="text-decoration:underline dashed;">
+      </span>
+      <span
+        data-text="°${unit}">
+      </span>
+    </div>
+  </div>
+
+  <button
+    style="all:unset; text-align:center; display:inline-block; border:2px solid black; border-radius:0.5em; padding: 0.5em 1.5em;"
+    type="button" data-action="if (unit=='F'){unit='C'} else{unit='F'}" xdata-action="unit = (unit=='F' ? 'C' : 'F')"
+    data-text="Convert to ${unit=='F'?'Celcius':'Fahrenheit'}">
+  </button>
+</body>
+
+<script>
+  let temp = 24;
+  let deg = temp / 20 * 180
+  let unit = 'C';
+  let displayDegree = (deg, unit) => unit == 'F' ? parseInt(9 / 5 * deg + 32) : deg;
+  let dragStart = false;
+
+  function getDegree(to) {
+    const center = [window.innerWidth/2,window.innerHeight/2]
+    const zeroPoint = [window.innerWidth/2, 0]
+    let deg = calculateAngle(zeroPoint[0],zeroPoint[1],center[0],center[1],to[0],to[1]);
+    if (to[0]>center[0])
+      deg = deg*-1+360;
+    else
+      deg = deg;
+    console.log(deg);
+    return deg;
+  }
+
+  function calculateAngle(x1, y1, x2, y2, x3, y3) {
+    const v1 = [x2 - x1, y2 - y1];
+    const v2 = [x3 - x2, y3 - y2];
+  
+    const dotProduct = v1[0] * v2[0] + v1[1] * v2[1];
+    const magnitudeV1 = Math.sqrt(v1[0] ** 2 + v1[1] ** 2);
+    const magnitudeV2 = Math.sqrt(v2[0] ** 2 + v2[1] ** 2);
+  
+    const angleRadians = Math.acos(dotProduct / (magnitudeV1 * magnitudeV2));
+    const angleDegrees = angleRadians * (180 / Math.PI);
+  
+    return angleDegrees;
+  }  
+</script>
+<script data-calc>
+  temp = (deg) / 180 * 20
+</script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

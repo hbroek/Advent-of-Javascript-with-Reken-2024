@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>19 - Multi-Step form || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --icon-color: #ff008c;
+      --border-color: #dbdbdb;
+      --input-background-color: #f4f4f4;
+      --border-radius: 10px;
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      background-color: black;
+      color:white;
+    }
+    button {
+      background:  #33ff01;
+      padding: 0.5em 2em ;
+      font-size:2em;
+      border-radius: 10px;
+      margin: 0.5em;
+
+    }
+    a.nav {
+      all:unset;
+      background:  #33ff01;
+      padding: 0.5em 2em ;
+      font-size:2em;
+      border-radius: 10px;
+      color:black;
+      text-align:center;
+      margin: 0.5em;
+    }
+    a.nav.back {
+      color:  #33ff01;
+      background-color: #666;
+      display:inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>19 - Multi-Step form || Advent of JavaScript</h1>
+
+  <main data-route="">
+  <form>
+    <label-input label="Full Name" required="true" input="formData.name" data-on-change="saveForm(formData)"></label-input>
+    <label-input label="Email Address" required="true" type="email" input="formData.email" data-on-change="saveForm(formData)"></label-input>
+    <a class="nav" href="#/reindeer">Next</a>
+  </form>
+  </main>
+  <main data-route="reindeer">
+    <form>
+      <label-radio label="Reindeer" required="true" input="formData.reindeer" options="reindeer" data-on-change="saveForm(formData)"></label-radio>
+      <div style="display:grid;grid-template-columns: 1fr 2fr;">
+        <a class="nav back" href="#/"><img src="arrow.svg"></a>
+        <a class="nav" href="#/movies">Next</a>
+      </div>
+    </form>
+  </main>
+  <main data-route="movies">
+    <form>
+      <label-checkbox label="What holiday movies have you watched this year?" required="false" input="formData.movies" options="movies" data-on-change="saveForm(formData)"></label-checkbox>
+      <div style="display:grid;grid-template-columns: 1fr 2fr;">
+        <a class="nav back" href="#/reindeer"><img src="arrow.svg"></a>
+        <button type="button" data-action="localStorage.removeItem('form');formData=emptyForm">Submit</button>
+      </div>
+    </form>
+  </main>
+</body>
+
+<script>
+  const reindeer = ['Dasher', 'Dancer', 'Prancer', 'Vixen', 'Comet', 'Cupid', 'Donner', 'Blitzen', 'Rudolph'];
+  const movies = ['Elf (2003)', 'Home Alone (1990)', 'The Grinch (1966)', 'It\'s a Wonderful Life (1946)', 'Die Hard (1988)']
+  const emptyForm = {
+    name: '',
+    email: '',
+    reindeer: '',
+    movies: []
+  }
+  let formData = loadForm()??emptyForm
+  function saveForm(formData) {
+    localStorage.setItem('form', JSON.stringify(formData));
+  }
+  function loadForm() {
+    return JSON.parse(localStorage.getItem('form'));
+  }
+</script>
+
+<template data-component="label-input" data-arg-label="" data-arg-type="text" data-bind-input data-arg-required>
+  <style>
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25em;
+      margin: 1em;
+    }
+    :host > span {
+      margin-left: 0.5em;
+    }
+    :host input {
+      font-size: 1.5em;
+      padding: 0.75em;
+      border-radius: 0.25em;
+      background:black;
+      color:white;
+      border:1px gray solid;
+
+    }
+  </style>
+  
+  <label>
+    <span>
+      <small data-text="${label}"></small><!--
+      --><super data-if="required">*</super>
+    </span>
+    <input type="text" data-attr-type="${type}" data-attr-required="required" data-value="input"/>
+  </label>
+</template>
+
+<template data-component="label-radio" data-arg-label="" data-bind-input data-arg-required data-arg-options data-arg-field>
+  <style>
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25em;
+      margin: 1em;
+    }
+    :host > span {
+      margin-left: 0.5em;
+    }
+    :host > div > label {
+      display:inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    :host input[type=radio] {
+      all:unset;
+      width:24px;
+      height:24px;
+      background-image: url(radio--unchecked.svg);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+    :host input[type=radio]:checked {
+      background-image: url(radio--checked.svg);
+    }
+    :host > div {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5em;
+    }
+  </style>
+  <label>
+    <span>
+      <small data-text="${label}"></small><!--
+      --><super data-if="required">*</super>
+    </span>
+    <div data-for="option:options">
+      <label>
+        <input type="radio" data-attr-required="required" data-attr-value="${option.item}" data-attr-name="${label}" data-value="input" />
+        <span data-text="${option.item}"></span>
+      </label>
+    </div>
+  </label>
+</template>
+
+
+<template data-component="label-checkbox" data-arg-label="" data-bind-input data-arg-required data-arg-options data-arg-field>
+  <style>
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25em;
+      margin: 1em;
+    }
+    :host > span {
+      margin-left: 0.5em;
+    }
+    :host input[type=checkbox] {
+      all:unset;
+      width:24px;
+      height:24px;
+      background-image: url(checkbox--unchecked.svg);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+    :host > div > label {
+      display:inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    :host input[type=checkbox]:checked {
+      background-image: url(checkbox--checked.svg);
+    }
+    :host > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+  </style>
+  <label>
+    <span>
+      <small data-text="${label}"></small><!--
+      --><super data-if="required">*</super>
+    </span>
+    <div data-for="option:options">
+      <label>
+        <input type="checkbox" data-attr-required="required" data-attr-value="${option.item}" data-attr-name="${label}" data-value="input" />
+        <span data-text="${option.item}"></span>
+      </label>
+    </div>
+  </label>
+</template>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
+<script src="../reken.js"></script>
+
+</html>

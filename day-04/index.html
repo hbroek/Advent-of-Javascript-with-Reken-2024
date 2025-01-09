@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 - Resizable text area || Advent of JavaScript</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    :root {
+      --light: #CAE3DB;
+      --middle: #698662;
+      --dark: #536A4E;
+    }
+
+    html {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-rows: 40vh 60vh;
+      grid-template-columns: 30vw 70vw;
+      gap: 0.25em; /* optional gap between grid cells */
+      background-color: black;
+
+    }
+    body:hover {
+      cursor: col-resize;
+      gap: 0.5em;
+      background: linear-gradient(to right, red , yellow);
+    }
+
+    body:has(div:hover) {
+      cursor: auto;
+      gap: 0.25em;
+      background: black;
+    }
+
+    .top {
+      background-color: var(--light);
+      grid-column: 1 / 3;
+    }
+
+    .left {
+      background: var(--middle);
+    }
+
+    .right {
+      background: var(--dark);
+    }
+  </style>
+</head>
+
+<body data-style="grid-template-rows: calc(${height}vh + ${pixelY}px) calc(${100-height}vh - ${pixelY}px);grid-template-columns: calc(${width}vw + ${pixelX}px) calc(${100-width}vw - ${pixelX}px);"
+  data-on-pointerdown="if (e.target.tagName=='BODY') {deltaY=e.clientY; moving=true; startY=pixelY;deltaX=e.clientX;startX=pixelX;}"
+  data-on-pointermove="if (moving) {pixelY=startY+(e.clientY-deltaY);pixelX=startX+(e.clientX-deltaX);}"
+  data-on-pointerup="if (moving) moving = false;">
+  <div class="top" data-text="${pixelY}"></div>
+  <div class="left" data-text="${pixelX}"></div>
+  <div class="right" data-text="${pixelX}"></div>
+</body>
+
+<script>
+  let height = 30;
+  let width = 20;
+  let pixelY = 0;
+  let pixelX = 0;
+  let deltaY = 0;
+  let deltaX = 0;
+  let moving = false;
+  let startY = 0;
+  let startX = 0;
+</script>
+
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
+</html>
