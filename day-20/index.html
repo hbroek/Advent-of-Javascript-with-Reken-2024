@@ -22,10 +22,18 @@
 </head>
 
 <body data-rest="movieList:top-100-christmas-movies.json">
-  <h1>20 - Infinite Scroll || Advent of JavaScript</h1>
-  <div class="list" data-if="movieList" data-for="m:movieList:max">
+  <header>
+    <details open>
+      <summary><h1>20 - Infinite Scroll || Advent of JavaScript</h1></summary>
+      Create a infinite scroll. By default, the first 15 movies, from the provided JSON file, should be displayed. Each time the user scrolls down to the bottom of the page, the next 15 movies should be added to the list.
+    </details>
+    <h3>Solution</h3>
+  </header>
+
+  <main class="list" data-if="movieList" data-for="m:movieList:max">
     <movie-card movie="m.item"></movie-card>
-  </div>
+  </main>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let movieList = []

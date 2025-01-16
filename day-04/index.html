@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>03 - Resizable text area || Advent of JavaScript</title>
+  <title>04 - Resizable split panels || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     :root {
@@ -19,7 +19,7 @@
       margin: 0;
     }
 
-    body {
+    main {
       margin: 0;
       padding: 0;
       display: grid;
@@ -29,13 +29,13 @@
       background-color: black;
 
     }
-    body:hover {
+    main:hover {
       cursor: col-resize;
       gap: 0.5em;
       background: linear-gradient(to right, red , yellow);
     }
 
-    body:has(div:hover) {
+    main:has(div:hover) {
       cursor: auto;
       gap: 0.25em;
       background: black;
@@ -56,13 +56,23 @@
   </style>
 </head>
 
-<body data-style="grid-template-rows: calc(${height}vh + ${pixelY}px) calc(${100-height}vh - ${pixelY}px);grid-template-columns: calc(${width}vw + ${pixelX}px) calc(${100-width}vw - ${pixelX}px);"
-  data-on-pointerdown="if (e.target.tagName=='BODY') {deltaY=e.clientY; moving=true; startY=pixelY;deltaX=e.clientX;startX=pixelX;}"
+<body>
+<header>
+  <details open>
+  <summary><h1>Challenge 4 - Resizable split panels || Advent of JavaScript</h1></summary>
+  Create a layout, where the panels can be resized dynamically. 1. You can drag the vertical left and right to resize the bottom two panels. 2. You can drag the horizontal line up and down to resize the top panel. 
+  </details>
+  </header>
+  <h3>Solution</h3>
+<main data-style="width:100%;grid-template-rows: calc(${height}vh + ${pixelY}px) calc(${100-height}vh - ${pixelY}px);grid-template-columns: calc(${width}vw + ${pixelX}px) calc(${100-width}vw - ${pixelX}px);"
+  data-on-pointerdown="if (e.target.tagName=='MAIN') {deltaY=e.clientY; moving=true; startY=pixelY;deltaX=e.clientX;startX=pixelX;}"
   data-on-pointermove="if (moving) {pixelY=startY+(e.clientY-deltaY);pixelX=startX+(e.clientX-deltaX);}"
   data-on-pointerup="if (moving) moving = false;">
-  <div class="top" data-text="${pixelY}"></div>
-  <div class="left" data-text="${pixelX}"></div>
-  <div class="right" data-text="${pixelX}"></div>
+  <div class="top"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+</main>
+<div data-include="../footer.html"></div>
 </body>
 
 <script>

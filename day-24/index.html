@@ -152,7 +152,17 @@
 
 <body>
   <header>
-    <h1>24 - CSS Box Shadow Generator || Advent of JavaScript</h1>
+    <details open>
+      <summary>
+        <h1>24 - CSS Box Shadow Generator || Advent of JavaScript</h1>
+      </summary>
+      Build a CSS Box Shadow Generator. Adjust Horizontal, Vertical length, Blur, Spread Radius, Shadow, Background, Box color, Opacity, and wether it is in outline or inset shadow. When clicking on the Get Code panel a source code panel appears with the ability to copy the code.
+    </details>
+    <h3>Solution</h3>
+  </header>
+
+  <header>
+    
   </header>
   <main>
     <editor>
@@ -186,10 +196,9 @@
         <button class="close" type="button" data-action="showCode=false;">✖️</button>
       </display-code>
     </show-code>
+    <button style="text-align: center;" type="button" data-action="showCode=true">Get Code</button>
   </main>
-  <footer>
-    <button type="button" data-action="showCode=true">Get Code</button>
-  </footer>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let hlen = 0;

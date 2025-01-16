@@ -22,8 +22,13 @@
 </head>
 
 <body>
-  <h1>03 - Resizable text area || Advent of JavaScript</h1>
+  <detail>
+  <summary><h1>Challenge 3 - Resizable text area || Advent of JavaScript</h1></summary>
+  Today’s challenge is to build a resizable text area. As you text into the text area, it should grow to accommodate the amount of text. If you pass in a default value, it should resize the initial display for the default amount of content.
+  </detail>
+  <h3>Solution</h3>
   <textarea data-attr-rows="${Math.max(3,textString.split('\n').length)}" data-value="textString"></textarea>
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>

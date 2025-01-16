@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05 - Character count || Advent of JavaScript</title>
+  <title>07 - Slugify input || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     :root {
@@ -25,47 +25,46 @@
         display:inline-block;
         background-color:#EDEDED;
         border-radius: 10px;
+        padding: 1em 1em;
+        border: 2px purple solid;
+        margin-bottom: 1em;
 
         input {
-          color:  #CFCECE; 
+          color:  #CFCECE;
+          font-size: 1.5em;
+          color: black;
+          padding: 0.5em;
+          background: transparent;
+          border:none;
         }
       }
-
     }
-
-    input background color: #EDEDED
-input stroke color: #CFCECE
-focus border color: #0015FF
-rounded border: 10px
-
-font: Inter - https://fonts.google.com/specimen/Inter
-default label size: 14px bold
-
-input text size: 24px regular
-
-slug text size: 16px regular
   </style>
 </head>
 
 <body>
-  <h1>07 - Slugify input || Advent of JavaScript</h1>
-
+  <details open>
+    <summary>
+      <h1>07 - Slugify input || Advent of JavaScript</h1>
+    </summary>
+    On the frontend, there’s a title input field with a corresponding label. When the user types a title into the input field, a preview of its corresponding slug is displayed below the input.
+  </details>
+  <h3>Solution</h3>
   <div class="slugify">
     <div>
-      <label>Title<br>
+      <label><small>Title</small><br>
         <input type="text" data-on-input="textString=e.target.value" data-value="textString">
       </label>
     </div>
     <output data-text="/${textString.split(' ').join('-')}">
     </output>
 
+    <div data-include="../footer.html"></div>
 </body>
 
 <script>
   let textString = "";
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

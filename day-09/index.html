@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05 - Character count || Advent of JavaScript</title>
+  <title>09 - Persist form field || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     :root {
@@ -31,7 +31,11 @@
 </head>
 
 <body>
-  <h1>09 - Persist form field || Advent of JavaScript</h1>
+  <details open>
+    <summary><h1>9 - Persist form field || Advent of JavaScript</h1></summary>
+  </details>
+  Persist form data across a page refresh. A user should be able to fill out the form. Before the user submits the form, they should be able to refresh the page or visit another page, come back, and see all their form data. Once the user submits the form, the form data should clear
+  <h3>Solution</h3>  
 
   <form>
     <label-input label="Full Name" required="true" input="formData.name" data-on-change="saveForm(formData)"></label-input>
@@ -40,6 +44,8 @@
     <label-checkbox label="What holiday movies have you watched this year?" required="false" input="formData.movies" options="movies" data-on-change="saveForm(formData)"></label-checkbox>
     <button type="button" data-action="localStorage.removeItem('form');formData=emptyForm">Submit</button>
   </form>
+  <div data-include="../footer.html"></div>
+
 </body>
 
 <script>
@@ -187,7 +193,5 @@
   </label>
 </template>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

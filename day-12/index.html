@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05 - Character count || Advent of JavaScript</title>
+  <title>12 - Quote Generator || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     @font-face {
@@ -45,10 +45,14 @@
 </head>
 
 <body>
-  <h1 data-rest="quotes:quotes.json">12 - Quote Generator|| Advent of JavaScript</h1>
+  <details open>
+    <summary><h1><h1 data-rest="quotes:quotes.json">12 - Quote Generator || Advent of JavaScript</h1></summary>
+    Use a Rest Quote API to fetch a random quote and display on it on the site. Each time you refresh the page, you should see a different quote  </details>
+  <h3>Solution</h3>  
 
   <q data-if="quotes" class="quote" data-text="${quotes[parseInt(Math.random()*quotes.length-1)].quote}">There is always tomorrow</q>
 
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
@@ -56,6 +60,5 @@
   let quote = "There is always more tomorrow"
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

@@ -56,17 +56,39 @@
 </head>
 
 <body>
-  <h1>22 - Drag and Drop Cards || Advent of JavaScript</h1>
+  <header>
+    <details open>
+      <summary>
+        <h1>22 - Drag and Drop Cards || Advent of JavaScript</h1>
+      </summary>
+      Create a Kanban Board. When the screen first loads, the cards are already loaded onto the screen, in three columns: Up Next, Current, and Done. Cards can be drag and dropped anywhere within each of the three columns.
+
+      The user can also reorder the list by dragging and dropping within a column.
+      
+      When a card is dropped on the Done column, then the checkbox is checked.
+      
+      If a card is moved out of the Done column, then the check is removed from the checkbox.
+      If the card is in the “Up Next” or the “Current” column and the user clicks on the checkbox, then the card will automatically move to the “Done” column.
+
+If the card is in the “Done” column and the user unchecks it, then the card will automatically move to the “Up Next” column
+
+
+    </details>
+    <h3>Solution</h3>
+  </header>
 
   <main data-for="board:boards">
     <section data-attr-data-index="${board.index}" data-on-drop="OnDrop(e)" data-on-dragover="OnDragOver(e)"
       data-on-dragleave="OnDragLeave(e)">
       <h3 data-text="${board.item}"></h3>
       <div class="list" data-for="card:actionItems[board.index]">
-        <todo-card draggable="true" data-on-dragstart="OnDragStart(e)" data-status="0" data-attr-data-index="${card.index}" text="${card.item}" completed="${board.index==2}"></todo-card>
+        <todo-card draggable="true" data-on-dragstart="OnDragStart(e)" data-status="0"
+          data-attr-data-index="${card.index}" text="${card.item}" completed="${board.index==2}">
+        </todo-card>
       </div>
     </section>
   </main>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let boards = ['Next', "Current", "Done"]
@@ -191,4 +213,5 @@
 </template>
 
 <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
 </html>

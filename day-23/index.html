@@ -73,14 +73,23 @@
       font-size:20px;
       line-height: 21px;
       font-weight: 500;
-
     }
 
   </style>
 </head>
 
 <body>
-  <h1>23 - Expense Tracker || Advent of JavaScript</h1>
+  <header>
+    <details open>
+      <summary>
+        <h1>23 - Expense Tracker || Advent of JavaScript</h1>
+      </summary>
+      Build a basic expense tracker. When the page first loads, only the vendor / amount input she be displayed. Both, the vendor and amount fields are required.
+      As soon as the user enters a vendor and amount and clicks on the check button, then the item gets added to the list and the total calculated. If the user clicks on the trash can icon on a specific line, then that line is deleted from the list.
+    </details>
+    <h3>Solution</h3>
+  </header>
+
   <main>
     <section>
       <h3>Expense Tracker</h3>
@@ -90,7 +99,7 @@
         <div></div>
         <input id="vendor" required size="20" type="text" data-value="vendor"/>
         <input id="amount" required size="8" type="text" data-value="amount"/>
-        <button type="button" data-action="expenses.push({'vendor':vendor,'amount':amount})"><img src="check.svg"></button>
+        <button type="button" data-action="true:expenses.push({'vendor':vendor,'amount':amount});"><img src="check.svg"/></button>
       </div>
       <div data-if="expenses.length>0" style="display:contents">
         <hr/>
@@ -108,6 +117,7 @@
       </div>
     </section>
   </main>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let expenses = [{vendor:'Staples', amount:'100.00'},{vendor:'Home Depot', amount:'200.00'}];

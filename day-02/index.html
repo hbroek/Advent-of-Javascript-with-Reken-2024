@@ -18,6 +18,9 @@
     html {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    body {
+      margin:1em;
+    }
 
     div.combo-box {
       height: var(--card-height);
@@ -25,6 +28,7 @@
       background: #EEE;
       display: inline-flex;
       box-sizing:border-box;
+      position:relative;
 
       menu {
         position: absolute;
@@ -53,7 +57,11 @@
 </head>
 
 <body>
-  <title>02 - Input / Combobox || Advent of JavaScript</title>
+  <detail>
+  <summary><h1>Challenge 2 - Input / Combobox || Advent of JavaScript</h1></summary>
+  Create a custom dropdown menu. When you click on input, show a dropdown that contains the movie thumbnail, title, and the year the movie was released. When the input is expanded, you should be able to search for the movie you want. Your input should limit the list of movies displays. When hovering over a specific movie, the background changes to blue.
+  </detail>
+  <h3>Solution</h3>
   <div class="combo-box" data-rest="movieList:top-100-christmas-movies.json">
     <input data-on-input="filterString=e.target.value" data-if="open" type="text" list="movies"/>
     <movie-card data-if="!open" movie="movieList[selected]"></movie-card>
@@ -62,7 +70,7 @@
       <movie-card movie="m.item" data-action="selected=parseInt(m.item.Title.split('.')[0])-1;open=false"></movie-card>
     </menu>
   </div>
-  <h1 data-text="${movieList[selected].Title}"></h1>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let movieList = []

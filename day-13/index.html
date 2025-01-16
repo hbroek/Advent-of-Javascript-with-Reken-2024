@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05 - Character count || Advent of JavaScript</title>
+  <title>13 - Temperature Converter || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     @font-face {
@@ -45,7 +45,11 @@
 </head>
 
 <body data-on-pointermove="if (dragStart) deg=getDegree([e.clientX,e.clientY])">
-  <h1 data-rest="quotes:quotes.json">13 - Temperature Converter|| Advent of JavaScript</h1>
+  <details open>
+    <summary><h1>13 - Temperature Converter|| Advent of JavaScript</h1></summary>
+    Build a temperature converter. By default the temperature displays 24° Celsius. The user can change the 24 in Celsius, click on the “Convert to Fahrenheit” button and the dial will change to display the amount in Fahrenheit. The user can change the Fahrenheit amount, click on the “Convert to Celsius” button and the dial will update to show Celsius information. 
+  </details>
+  <h3>Solution</h3>  
 
   <div style="width:404px;height:404px;position:relative;display:inline-grid;">
     <svg style="position:absolute;top:0;left:0;" width="404" height="404" viewBox="0 0 404 404" fill="none"
@@ -135,7 +139,6 @@
       deg = deg*-1+360;
     else
       deg = deg;
-    console.log(deg);
     return deg;
   }
 
@@ -157,7 +160,5 @@
   temp = (deg) / 180 * 20
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

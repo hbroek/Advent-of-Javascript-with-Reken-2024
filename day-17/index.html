@@ -43,8 +43,13 @@
 </head>
 
 <body>
-  <h1>17 - Track Current Section  || Advent of JavaScript</h1>
-
+  <header>
+    <details open>
+      <summary><h1>17 - Track Current Section  || Advent of JavaScript</h1></summary>
+      Create a side navigation that updates as the corresponding scrolls into view. The sidebar nav should stick to the top of the screen, as the user scrolls. When the current section scrolls into view, the corresponding nav item, in the sidebar, changes to red and the right arrow moves to the current section. If the user clicks on a link in the sidebar, the correct text should scroll to the top
+    </details>
+    <h3>Solution</h3>
+  </header>
 
   <main style="display:grid; grid-template-columns: 1fr 4fr;">
     <nav style="display:flex;flex-direction: column; position:sticky;" data-for="s:5">
@@ -113,7 +118,7 @@
 
     </article>
   </main>
-
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
@@ -130,7 +135,5 @@
 
   })
 </script>
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

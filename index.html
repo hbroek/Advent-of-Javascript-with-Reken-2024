@@ -1,0 +1,228 @@
+<html>
+    <head>
+        <title>Reken solutions for Advent of Javascript</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+        <meta name="description" content="Solutions for the Advent of Javascript based using web development framework Reken">
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+        <link href="https://fonts.cdnfonts.com/css/mountains-of-christmas" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Mountains of Christmas', sans-serif;                                                
+                font-weight: 400;
+                letter-spacing: 0em;
+                line-height: 1.75;
+                color: #222;
+                background-color: #fff;
+                transition: color 0.5s, background-color 0.5s;
+            }
+            body.dark-theme {
+                color: #eee;
+                background-color: #121212;
+            }
+            #theme-switcher {
+                position:absolute;
+                right:0;
+                top:0;
+                padding-right: 0.25em;
+            }
+
+            p {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+            }
+            p.item-text {
+                display:flex;
+                justify-content: space-between;
+                align-items:center;
+            }
+            a.code-link {
+                font-size:0.75em;
+                color:gray;
+            }
+        </style>
+
+    </head>
+    <script>        
+        let darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        let challenges = [
+            {
+                name: "Password Field",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-1/STARTER-FILES",
+                demo: "day-01/index.html",
+                image: "1-password.png"
+            },
+            {
+                name: "Combobox",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-2/STARTER-FILES",
+                demo: "day-02/index.html",
+                image: "2-combo-box.png"
+            },
+            {
+                name: "Resizable text area",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-3",
+                demo: "day-03/index.html",
+                image: "3-resizable-text-area.png"
+            },
+            {
+                name: "Resizable split panels",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-4/STARTER-FILES",
+                demo: "day-04/index.html",
+                image: "4-resizable-split-panels.png"
+            },
+            {
+                name: "Character count",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-5/STARTER-FILES",
+                demo: "day-05/index.html",
+                image: "5-character-count.png",
+            },
+            {
+                name: "Copy to Clipboard",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-6/STARTER-FILES",
+                demo: "day-06/index.html",
+                image: "6-copy-to-clipboard.png"
+            },
+            {
+                name: "Slugify input",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-7",
+                demo: "day-07/index.html",
+                image: "7-slugify-input.png"
+            },
+            {
+                name: "Tag Input Field",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-8",
+                demo: "day-08/index.html",
+                image: "8-tag-input-field.png"
+            },
+            {
+                name: "Persist Form Fields",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-9",
+                demo: "day-09/index.html",
+                image: "9-persist-form-field.png"
+            },
+            {
+                name: "Floating Action button",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-10",
+                demo: "day-10/index.html",
+                image: "10-floating-action-button.png"
+            },
+            {
+                name: "Digital Clock",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-11/STARTER-FILES",
+                demo: "day-11/index.html",
+                image: "11-digital-clock.png"
+            },
+            {
+                name: "Quote Generator",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-12",
+                demo: "day-12/index.html",
+                image: "12-quote-generator.png"
+            },
+            {
+                name: "Temperature Converter",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-13/STARTER-FILES",
+                demo: "day-13/index.html",
+                image: "13-temperature-converter.png"
+            },
+            {
+                name: "Conditional Select",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-14",
+                demo: "day-14/index.html",
+                image: "14-conditional-select.png"
+            },
+            {
+                name: "Youtube Repsonsive Embed",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-15",
+                demo: "day-15/index.html",
+                image: "15-youtube-embed-responsive.png"
+            },
+            {
+                name: "CSS Grid Generator",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-16",
+                demo: "day-16/index.html",
+                image: "16-css-grid-generator.png"
+            },
+            {
+                name: "Track Current Section",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-17",
+                demo: "day-17/index.html",
+                image: "17-track-current-section.png"
+            },
+            {
+                name: "Pricing Chart",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-18",
+                demo: "day-18/index.html",
+                image: "18-pricing-chart.png"
+            },
+            {
+                name: "Multi Step Form",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-19",
+                demo: "day-19/index.html",
+                image: "19-multi-step-form.png"
+            },
+            {
+                name: "Infinite Scroll",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-20",
+                demo: "day-20/index.html",
+                image: "20-infinite-scroll.png"
+            },
+            {
+                name: "Calendar",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-21/STARTER-FILES",
+                demo: "day-21/index.html",
+                image: "21-calendar.png"
+            },
+            {
+                name: "Drag and Drop",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-22",
+                demo: "day-22/index.html",
+                image: "22-drag-and-drop.png"
+            },
+            {
+                name: "Expense Tracker",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-23",
+                demo: "day-23/index.html",
+                image: "23-expense-tracker.png"
+            },
+            {
+                name: "CSS Shadow Generator",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-24/STARTER-FILES",
+                demo: "day-24/index.html",
+                image: "24-css-shadow-generator.png"
+            }
+        ]
+    </script>
+    <body data-class="dark-theme:darkTheme">
+        <header>
+            <img src="images/advent-of-javascript-2024.png" alt="">
+            </img>
+            <h1>Solutions for the Advent of Javascript 2024 Challenge</h1>
+            <h3>Implemented with web dev framework <a href="https://reken.dev">Reken</a></h3>
+        </header>
+        <main>
+            <section>
+                <header>
+                <h2>Advent of Javascript challenge</h2>
+                <p>Complete <a href="https://store.selfteach.me/view/courses/advent-of-javascript-2024"> 24 Javascript coding challenges</a> from December 1st - 24th. Organized by <a href="https://selfteach.me/">selfteach.me</a> The challenges evolve around making static web sites/apps interactive.</p>
+                <h2>Who are you?</h2>
+                <p>Glad you asked, I'm Henry van den Broek, developer of <a href="https://reken.dev">Reken</a>. And I love this challenge to put Reken through its paces. And so far Reken seems to be a great match to help solve the challenges. You'll see that some solutions are literally just a sprinkle of Reken goodness.</p>
+                <h2>Why Reken?</h2>
+                <p>Reken is an easy way to add functionality to a static website. I build Reken with that in mind. Take existing HTML, sprinkle some Reken data-* attributes and see it come alive like putting lights in a Christmas tree.</p>
+                <h2>Where can I find the solutions?</h2>
+                <p>You'll find the solutions source code on <a href="https://github.com/hbroek/Advent-of-Javascript-with-Reken-2024">Github</a>. With direct links to the solutions below. I also created a Github pages website (<a href="https://hbroek.github.io/Advent-of-Javascript-with-Reken-2024/">this page</a>) where you can see the live demos</p>
+                </header>
+            </section>
+            <section><h1>Solutions</h1></section>
+            <section data-for="c:challenges">
+                    <aside>
+                        <a data-attr-href="${c.item.demo}"><img data-attr-src="images/${c.item.image}"></img></a>
+                        <p class="item-text">
+                            <a data-attr-href="${c.item.demo}" data-text="${c.index+1} - ${c.item.name}">Pomodoro timer</a><a class="code-link" data-attr-href="https://github.com/hbroek/Advent-of-Javascript-with-Reken-2024/tree/main/day-${(''+(c.index+1)).padStart(2,'0')}">code</a>
+                        </p>
+                    </aside>
+            </section>
+        </main>
+        <footer><header>(c)2024, Henry van den Broek</header></footer>
+    </body>
+    <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
+</html>

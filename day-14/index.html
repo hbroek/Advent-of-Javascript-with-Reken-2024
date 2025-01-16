@@ -26,8 +26,12 @@
 
 </head>
 
-<body>
-  <h1 data-rest="data:options.json">14 Conditional Select|| Advent of JavaScript</h1>
+<body>  
+  <details open>
+    <summary><h1 data-rest="data:options.json">14 Conditional Select|| Advent of JavaScript</h1></summary>
+    Build a conditional select menu. By default, the user only sees one select menu, with options for Men’s, Women’s, Boy’s, and Girl’s. Based on the selection made, the second dropdown will display filtered categories. If the men’s category was selected, then the category selection will filter a third dropdown
+  </details>
+  <h3>Solution</h3>  
 
   <section>
     <select data-if="data" data-for="cat:data.categories" data-value="optionValue0" data-on-change="optionValue1=null;optionValue2=null">
@@ -48,6 +52,7 @@
     <output data-if="optionValue1" data-text=" / ${data.categories[optionValue0].subcategories[optionValue1].name}"></output>
     <output data-if="optionValue2" data-text=" / ${data.categories[optionValue0].subcategories[optionValue1].options[optionValue2]}"></output>
 </section>
+<div data-include="../footer.html"></div>
 </body>
 
 <script>

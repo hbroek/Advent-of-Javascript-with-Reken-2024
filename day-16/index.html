@@ -20,16 +20,27 @@
       background: black;
       color: white;
     }
-    section {
-      display:flex;
-      gap: 1em;
-      align-items: start;
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+      border-radius: 0.5em;
     }
-    nav {
-      background:#333;
-      gap: 1em;
-      display:flex;
-      flex-direction:column;
+
+    editor,
+    preview {
+      padding: 1em;
+    }
+
+    editor {
+      background: #333;
+      border-radius: 0.25em;
+    }
+
+    preview {
+      background: black;
+      display: grid;
+      place-content: center;
     }
     header {
       color: yellow;
@@ -51,44 +62,182 @@
         align-self: right;
       }
     }
+    .preview {
+      display:grid;
+    }
+    .header {
+      background:pink;
+    }
+    .body {
+      border:2px solid yellow;
+      box-sizing:content-box;
+    }
+    .cell {
+      width:100%;
+      height:100%;
+      box-sizing:border-box;
+      display:flex;
+      justify-content:center;
+      align-content:center;
+      place-items: center;
+      border: 0.5px gray solid;
+    }
+    .cell.top-left {
+      border: none;
+    }
+    input.cell {
+      all:unset;
+      min-width: 0;
+      background:#333;
+      color:white;
+      width:2em;
+      height:2em;
+      padding-inline:2px;
+      box-sizing: border-box;
+      border-radius: 0.5em;
+      text-align: center;
+    }
+    .top-left {
+      visibility: hidden;
+    }
+    show-code {
+      position: relative;
+      background: yellow;
+      padding: 1em;
+    }
+
+    button.close {
+      all:unset;
+      background: transparent;
+      color: black;
+      padding: 1em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+    }
+
+    button.copy {
+      background: white;
+      padding-inline: 1em;
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      margin: 0;
+      padding: 0.5em;
+      color: black;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    @font-face {
+      font-family: 'FontWithASyntaxHighlighter';
+      src:
+        url('FontWithASyntaxHighlighter-Regular.woff2') format('woff2');
+    }
+
+    code {
+      font-family: "FontWithASyntaxHighlighter", monospace;
+      display: block;
+    }
+
+    pre {
+      position: relative;
+      background: black;
+      border-radius: 1em;
+      color: white;
+      padding: 0.5em;
+      margin: 1em;
+      line-height: 2em;
+    }
+
   </style>
 
 </head>
 
 <body>
-  <h1>16 - CSS Grid Generator || Advent of JavaScript</h1>
+  <header>
+    <details open>
+      <summary><h1>16 - CSS Grid Generator || Advent of JavaScript</h1></summary>
+      Build a CSS Grid Generator. When you adjust the number of rows in the sidebar, it will adjust the number of rows in the grid. When you adjust the number of columns in the sidebar, it will adjust the number of columns in the grid. When you adjust the column gap or row gap, the grid updates accordingly. When you adjust the column or grid sizes, the grid updates accordingly. When you click on the “Get Code” button, a panel slides in from the right with the HTML and CSS code. You can click on the “Copy to Clipboard” button and the code gets copied to your clipboard. When you click on the “X” in the top right corner, the panel closes.
+    </details>
+    <h3>Solution</h3>
+  </header>
 
-  <section>
-    <nav>
-      <header><h1>CSS Grid Generator</h1></header>
-      <form>
-        <label><span>Columns</span><input type="number" data-value="columns"></label>
-        <label><span>Rows</span><input type="number" data-value="rows"></label>
-        <label><span>Column Gap</span><input type="number" data-value="col_gap"></label>
-        <label><span>Row Gap</span><input type="number" data-value="row_gap"></label>
-      </form>
-      <button style="padding:0.5em 1em; margin:1em; border: 1px solid white;border-radius:0.5em;background:black;color:yellow; " type="button" data-action="navigator.clipboard.writeText(grid_style)">Get Code</button>
-    </nav>
-    <div class="preview" data-style="${grid_style};border:1px solid yellow" data-for="c:columns*rows">
-      <div style="border:1px gray solid;width:2em;height:2em;"></div>
-    </div>
-  </section>
-
+  <main>
+      <editor>
+        <header><h1>CSS Grid Generator</h1></header>
+        <form>
+          <label><span>Columns</span><input type="number" data-value="columns"></label>
+          <label><span>Rows</span><input type="number" data-value="rows"></label>
+          <label><span>Column Gap</span><input type="number" data-value="col_gap"></label>
+          <label><span>Row Gap</span><input type="number" data-value="row_gap"></label>
+        </form>
+        <button style="padding:0.5em 1em; margin:1em; border: 1px solid white;border-radius:0.5em;background:black;color:yellow; " type="button" data-action="showCode=true;">Get Code</button>
+      </editor>
+      <preview data-if="!showCode" class="preview" data-style="grid-template-columns: 1fr ${columns}fr; grid-template-rows: 1fr ${rows}fr; column-gap: ${col_gap}px; row-gap: ${row_gap}px">
+        <div class="cell top-left"></div>
+        <div class="col_header" data-style="display:inline-grid;grid-template-columns: ${col_sizes.join(' ')};column-gap: ${col_gap}px;place-items:center;" data-for="c:col_sizes">
+          <input class="header column cell" data-value="col_sizes[c.index]">
+        </div>
+        <div class="row_header" data-style="display:inline-grid;place-items: center;grid-template-rows: ${row_sizes.join(' ')};row-gap: ${row_gap}px;" data-for="r:row_sizes">
+          <input class="header row cell" data-value="row_sizes[r.index]">
+        </div>
+        <div class="body" data-for="c:columns*rows" data-style="display:inline-grid;grid-template-columns: ${col_sizes.join(' ')}; grid-template-rows: ${row_sizes.join(' ')};column-gap: ${col_gap}px; row-gap: ${row_gap}px">
+          <div class="body cell"></div>
+        </div>
+      </preview>
+      <show-code data-if="showCode">
+        <display-code>
+          <header>
+            <h3>CSS</h3>
+          </header>
+          <pre><code data-text="${grid_style}"></code><button class="copy" data-action="navigator.clipboard.writeText(grid_style)"><img src="clipboard.svg">Copy to Clipboard</button></pre>
+          <button class="close" type="button" data-action="showCode=false;">✖️</button>
+        </display-code>
+        <display-code>
+          <header>
+            <h3>HTML</h3>
+          </header>
+          <pre><code data-text="${html_string}"></code><button class="copy" data-action="navigator.clipboard.writeText(html_string)"><img src="clipboard.svg">Copy to Clipboard</button></pre>
+        </display-code>
+      </show-code>      
+  </main>
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
   let columns = 5
-  let col_gap = 2;
+  let col_gap = 0;
   let rows = 5
-  let row_gap = 2;
+  let row_gap = 0;
+  let showCode = false;
   let grid_style;
+  const html_string = 
+`<div class="parent">
+  
+</div>`
+  let col_sizes = new Array(columns).fill('1fr');
+  let row_sizes = new Array(rows).fill('1fr');
+
+  function isHeader(index, columns) {
+    return (index/columns)<=1||((index%(columns+1))==0)
+  }
 </script>
 
 <script data-calc>
-  grid_style = `display:grid;grid-template-columns:repeat(${columns}, 1fr);grid-template-rows:repeat(${rows}, 1fr);column-gap:${col_gap}px;row-gap:${row_gap}px;`
+  col_sizes = new Array(columns).fill('1fr').map((el, index) => col_sizes[index]??'1fr');
+  row_sizes = new Array(rows).fill('1fr').map((el, index) => (row_sizes[index]??'1fr'));
+  grid_style =
+`.parent {
+  display:grid;
+  grid-template-columns: ${col_sizes.join(' ')};
+  grid-template-rows: ${row_sizes.join(' ')};
+  column-gap: ${col_gap}px;
+  row-gap: ${row_gap}px;
+}`
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
 </html>

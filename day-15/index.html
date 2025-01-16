@@ -27,20 +27,22 @@
 </head>
 
 <body>
-  <h1>15 - YouTube Embed Responsive || Advent of JavaScript</h1>
-
-
+  <details open>
+    <summary><h1>15 - YouTube Embed Responsive || Advent of JavaScript</h1></summary>
+    Make a YouTube Embed Responsive. If you go to YouTube and grab the embed code, the width and height values are hard coded. If you want the video to fill the width, then you need to adjust these values programmatically.
+  </details>
+  <h3>Solution</h3>
   <iframe data-attr-width="${document.body.clientWidth}" data-attr-height="${document.body.clientWidth/700*396}" src="https://www.youtube.com/embed/a7FZaMXs9nk"
-    title="Fun 2 weeks on the Happy Island of Aruba" frameborder="0"
+    title="Visit to US Nationals 2024" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
   window.addEventListener('resize', (e)=>{if (reken) reken.force_calculate()})
 </script>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

@@ -21,21 +21,33 @@
       background-color: black;
       color:white;
     }
+    input {
+      background: #333;
+      color:white;
+      font-size: 1.5em;
+      padding: 0.5em;
+      border:none;
+    }
   </style>
 </head>
 
 <body>
-  <h1>08 - Tag input field || Advent of JavaScript</h1>
-
+  <details open>
+  <summary><h1>08 - Tag input field || Advent of JavaScript</h1></summary>
+  Create a tag input field. By default, the input looks like a normal text input. When the user enters some text and then types a , the text turns into a tag. The user can enter as many tags as they’d like. The user can hit the x to remove the tag from the list. If there isn’t any text in the input and the user hits the delete key, then it will delete the last tag in the list.
+  </details>
+  <h3>Solution</h3>
   <div class="tags">
     <label>Tags<br>
       <div data-for="tag:tags" style="display:inline-block;">
         <tag-bullet data-on-removetag="tags.splice(tag.index,1)" text="${tag.item}"></tag-bullet>
       </div>
-      <input type="text" data-on-input="if (e.target.value.endsWith(',')){let x = e.target.value;tags.push(x.substring(0,x.length-1));e.target.value=''}"/>
+      <input type="text" data-on-input="if (e.target.value.endsWith(',')){let x = e.target.value;tags.push(x.substring(0,x.length-1));e.target.value=''};"
+        data-on-keyDown="if(e.key === 'Backspace' && e.target.value ===''){if (tags.length>0)tags.splice(-1,1)}"
+      />
     </label>
   </div>
-
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
@@ -66,11 +78,10 @@
   </style>
   <div>
     <span data-text="${text}"></span>
-    <button type="button" data-action="console.log('REMOVETAG');dispatch('removetag',text)">X</button>
+    <button type="button" data-action="dispatch('removetag',text)">X</button>
   </div>
 </template>
 
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
 </html>

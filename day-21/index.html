@@ -22,8 +22,21 @@
 </head>
 
 <body>
-  <h1>21 - Date Picker || Advent of JavaScript</h1>
-  <date-picker value="date"></date-picker>
+  <header>
+    <details open>
+      <summary><h1>21 - Date Picker || Advent of JavaScript</h1></summary>
+      Create a date picker. The default date input should look like a regular input, with a calendar icon the right. When the user focuses on the date input, a date picker popup should appear. The pop up should default to the current month and year. Clicking on the left and right arrows will display the previous or next month respectively.
+      Dates that have already passed appear grayed out.
+      Today’s date is blue.
+      The selected date has a pink outline.
+      When the user clicks on a date to select it, the chose date will appear in the input.
+    </details>
+    <h3>Solution</h3>
+  </header>
+  <main>
+    <date-picker value="date"></date-picker>
+  </main>
+  <div data-include="../footer.html"></div>
 </body>
 <script>
   let date = new Date();
@@ -89,24 +102,6 @@
     :host div.day.past {
       color: #909090
     }
-    /*
-    Helvetica Neue
-
-    Date Field Text and Placeholder - 24px / line-height: 24px
-    Month - 48px / line-height 48px
-
-    Day of the Week - 20px / bold / line-height: 20px
-    Date - 36px / Bold / line-height: 60px
-
-    Black: #000
-    Input Fill Color: #F4F4F4
-    Input Border Color: #DBDBDB
-
-    Past Date Color: #909090
-    Today's Date Color: #08f2ff
-
-    Selected Date Border: #FF00CC
-    */
   </style>
   <script>
     let show = false;

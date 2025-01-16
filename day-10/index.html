@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05 - Character count || Advent of JavaScript</title>
+  <title>10 - Floating Action Button || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     :root {
@@ -31,8 +31,13 @@
 </head>
 
 <body>
-  <h1>10 - Floating Action Button || Advent of JavaScript</h1>
+  <details open>
+    <summary><h1>10 - Floating Action Button || Advent of JavaScript</h1></summary>
+  </details>
+  Build a floating action button that expands and collapses. The megaphone button should be fixed to the bottom right of the screen. When the user clicks on the megaphone, it expands to reveal the social media icons. When expanded, the icon in the action button changes to an x. When the user clicks on the x button, it collapses the social media icons, hiding them.
+  <h3>Solution</h3>  
   <floating-button icons="social_media"></floating-button>
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
@@ -86,7 +91,7 @@
   </script>
   <div>
     <button data-class="expanded" type="button" data-action="expanded=!expanded"></button>
-    <nav xdata-if="expanded" data-for="icon:icons">
+    <nav data-for="icon:icons">
       <floating-icon image="${icon.item.icon}" url="${icon.item.url}" deg="${expanded?140+200/5*icon.index:0}" size="${expanded?10:0}"></floating-icon>
     </nav>
   </div>
@@ -116,6 +121,5 @@
   </style>
   <a data-attr-href="${url}" data-style="background-image:url(${image}.svg); transform: rotate(${deg}deg) translate(calc(${size}em / 2)) rotate(-${deg}deg)"></a>
 </template>
-<!-- <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script> -->
-<script src="../reken.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

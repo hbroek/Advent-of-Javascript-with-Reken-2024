@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>01 - Password Field || Advent of JavaScript</title>
+  <title>Challenge 1 - Password Field || Advent of JavaScript</title>
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     :root {
@@ -74,7 +74,11 @@
 </head>
 
 <body>
-  <title>01 - Password Field || Advent of JavaScript</title>
+  <details open>
+  <summary><h1>Challenge 1 - Password Field || Advent of JavaScript</h1></summary>
+    <p>Create a password input field. Clicking on the eyeball will toggle the password visibility on and off.</p>
+  </details>
+  <h3>Solution</h3>
 
   <div class="password-field" data-class="visible:type!='password'">
     <svg class="lock" viewBox="0 0 86 112" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +86,7 @@
     </svg>
 
     <input data-attr-type="${type}" data-value="passwordValue" placeholder="Password"/>
-    <svg class="eye" data-action="console.log('clicked');type=type=='password'?'text':'password'" viewBox="0 0 110 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="eye" data-action="type=type=='password'?'text':'password'" viewBox="0 0 110 107" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path data-if="type=='password'" d="M105 71C105 71 82.6142 102 55 102C27.3858 102 5 71 5 71" stroke="#26C9C3" stroke-width="10" stroke-linecap="round"/>
       <path data-if="type=='password'" d="M70 70C70 78.2843 63.2843 85 55 85C46.7157 85 40 78.2843 40 70C40 61.7157 46.7157 55 55 55C63.2843 55 70 61.7157 70 70Z" fill="#26C9C3"/>
       <path d="M105 70C105 70 82.6142 39 55 39C27.3858 39 5 70 5 70" stroke="#26C9C3" stroke-width="10" stroke-linecap="round"/>
@@ -91,12 +95,12 @@
       <path d="M9.00049 20.9996L18.6856 34.971" stroke="#26C9C3" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-    
+  <div data-include="../footer.html"></div>
 </body>
 
 <script>
   let passwordValue = ''
-  let type = "input";
+  let type = "password";
 </script>
 <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
